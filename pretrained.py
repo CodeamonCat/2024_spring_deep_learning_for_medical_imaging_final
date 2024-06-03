@@ -88,7 +88,7 @@ def parse_option() -> argparse.Namespace:
                         help='data directory')
     parser.add_argument('--epochs',
                         type=int,
-                        default=5,
+                        default=15,
                         help='number of epochs')
     parser.add_argument('--lr', type=float, default=2e-5, help='learning rate')
     parser.add_argument('--output_dir',
@@ -173,6 +173,7 @@ def train_transforms(examples, feature_extractor) -> dict:
         transforms.Resize((feature_extractor.size['height'],
                            feature_extractor.size['width'])),
         transforms.RandomHorizontalFlip(),
+        transforms.RandomRotation(15),
         transforms.ToTensor(),
         transforms.Normalize(mean=feature_extractor.image_mean,
                              std=feature_extractor.image_std),
